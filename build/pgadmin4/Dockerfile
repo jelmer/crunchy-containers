@@ -8,9 +8,11 @@ FROM ${PREFIX}/crunchy-base:${BASEOS}-${PG_FULL}-${BASEVER}
 ARG BASEOS
 ARG PACKAGER
 ARG PG_MAJOR
+ARG PGADMIN_VER
 
 # Needed due to lack of environment substitution trick on ADD
 ARG PG_LBL
+ARG DFSET
 
 LABEL name="pgadmin4" \
 	summary="pgAdmin4 GUI utility" \
