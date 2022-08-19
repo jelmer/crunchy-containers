@@ -23,10 +23,10 @@ ADD conf/crunchypg*.repo /etc/yum.repos.d/
 
 # install the highest version of PostgreSQL + pgAudit and its dependencies as
 # well as unzip
-RUN if [ "$BASEOS" = "ubi8" ] ; then \
+RUN if [ "$DFSET" = "rhel" ] ; then \
 	${PACKAGER} -y install --nodocs \
-		--disablerepo=crunchydata* \
-	    --enablerepo="crunchydatadevpg${PG_MAJOR//.}" \
+		--disablerepo=crunchypg* \
+	    --enablerepo="crunchypg${PG_MAJOR//.}" \
 		krb5-workstation \
 		"postgresql${PG_MAJOR//.}" \
 		"postgresql${PG_MAJOR//.}-contrib" \
@@ -54,10 +54,10 @@ fi
 # add in all of the earlier version of PostgreSQL. It will install the version
 # above, but the dependencies are handled
 RUN for pg_version in $UPGRADE_PG_VERSIONS; do \
-        if [ "$BASEOS" = "ubi8" ] ; then \
+        if [ "$DFSET" = "rhel" ] ; then \
             ${PACKAGER} -y install --nodocs \
                 --disablerepo=* \
-                --enablerepo=crunchydatadevpg* \
+                --enablerepo=crunchypg* \
                 postgresql${pg_version} \
                 postgresql${pg_version}-contrib \
                 postgresql${pg_version}-server \
