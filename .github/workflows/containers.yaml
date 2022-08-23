@@ -26,8 +26,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-go@v3
     - name: Install native dependencies
-      run: sudo apt-get update && sudo apt-get install -y golang-go buildah git wget
+      run: sudo apt-get update && sudo apt-get satisfy -y buildah git wget
     - name: Setup
       env:
         CCPROOT: "${{ github.workspace }}"
