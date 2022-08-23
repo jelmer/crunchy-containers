@@ -34,9 +34,6 @@ jobs:
       run: make setup
     - name: Build all images
       env:
-        GOPATH: "${{ env.HOME }}/cdev"
-        GOBIN: "${{ env.GOPATH }}/bin"
-        PATH: "${{ env.PATH }}:${{ env.GOBIN }}"
         CCP_IMAGE_TAG: "${{ env.CCP_BASEOS }}-${{ env.CCP_PG_FULLVERSION }}-${{ env.CCP_VERSION }}"
         CCPROOT: "${{ github.workspace }}"
         CCP_POSTGIS_IMAGE_TAG: "${{ env.CCP_BASEOS }}-${{ env.CCP_PG_FULLVERSION }}-${{ env.CCP_POSTGIS_VERSION }}-${{ env.CCP_VERSION }}"
