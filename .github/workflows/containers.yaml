@@ -33,6 +33,12 @@ jobs:
       env:
         CCPROOT: "${{ github.workspace }}"
       run: make setup
+    - name: Fetch repositories
+      env:
+        CCPROOT: "${{ github.workspace }}"
+      run: |
+        wget https://api.developers.crunchydata.com/downloads/repo/rpm-centos/postgresql14/crunchypg14.repo -O "$CCPROOT/conf/crunchypg14.repo"
+        wget https://api.developers.crunchydata.com/downloads/gpg/RPM-GPG-KEY-crunchydata-dev -O "$CCPROOT/conf/RPM-GPG-KEY-crunchydata-dev"
     - name: Build all images
       env:
         CCP_IMAGE_TAG: "${{ env.CCP_BASEOS }}-${{ env.CCP_PG_FULLVERSION }}-${{ env.CCP_VERSION }}"
