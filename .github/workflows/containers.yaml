@@ -1,0 +1,41 @@
+name: Crunchy containers
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 6 * * *'  # Daily 6AM UTC build
+
+env:
+  CCP_BASEOS: rocky8
+  CCP_PGVERSION: 14
+  CCP_PG_FULLVERSION: 14.5
+  CCP_VERSION: 5.1.2-0
+  CCP_IMAGE_PREFIX: jelmer-crunchy
+  CCP_POSTGIS_VERSION: 3.2
+  CCP_SECURITY_CONTEXT: ""
+  CCP_CLI: kubectl
+  CCP_NAMESPACE: postgres-operator
+  CCP_PG_EXTENSIONS: ""
+  CCP_BACKREST_VERSION: 2.36
+  CCP_PGADMIN_VERSION: 4.20
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install native dependencies
+      run: sudo apt-get update && sudo apt-get install -y golang-go buildah git wget
+    - name: Setup
+      run: make setup
+    - name: Build all images
+      env:
+        GOPATH: "${{ env.HOME }}/cdev"
+        GOBIN: "${{ env.GOPATH }}/bin"
+        PATH: "${{ env.PATH }}:${{ env.GOBIN }}"
+        CCP_IMAGE_TAG: "${{ env.CCP_BASEOS }}-${{ env.CCP_PG_FULLVERSION }}-${{ env.CCP_VERSION }}"
+        CCPROOT: "${{ github.workspace }}"
+        CCP_POSTGIS_IMAGE_TAG: "${{ env.CCP_BASEOS }}-${{ env.CCP_PG_FULLVERSION }}-${{ env.CCP_POSTGIS_VERSION }}-${{ env.CCP_VERSION }}"
+      run: make all
