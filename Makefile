@@ -59,6 +59,13 @@ ifeq ("$(CCP_BASEOS)", "rocky8")
         BASE_IMAGE_OS=8
 endif
 
+ifeq ("$(CCP_BASEOS)", "rocky9")
+        DFSET=centos
+        PACKAGER=dnf
+        DOCKERBASEREGISTRY=docker.io/rockylinux/rockylinux:
+        BASE_IMAGE_OS=9
+endif
+
 .PHONY:	all license pgbackrest-images pg-independent-images pgimages
 
 # list of image names, helpful in pushing

@@ -7,7 +7,7 @@ on:
     - cron: '0 6 * * *'  # Daily 6AM UTC build
 
 env:
-  CCP_BASEOS: rocky8
+  CCP_BASEOS: rocky9
   CCP_PGVERSION: "14"
   CCP_PG_FULLVERSION: "14.5"
   CCP_VERSION: "5.1.2-0"
