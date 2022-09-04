@@ -11,7 +11,7 @@ env:
   CCP_PGVERSION: "14"
   CCP_PG_FULLVERSION: "14.5"
   CCP_VERSION: "5.1.2-0"
-  CCP_IMAGE_PREFIX: ghcr.io/jelmer/crunchy-containers
+  CCP_IMAGE_PREFIX: ghcr.io/jelmer
   CCP_POSTGIS_VERSION: "3.2"
   CCP_SECURITY_CONTEXT: ""
   CCP_CLI: kubectl
